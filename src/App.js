@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [tanks, setTanks] = useState([
+    "M60",
+    "M48Patton",
+    "T110E5",
+    "T110E4",
+    "Sheridan",
+  ]);
+  const Remove = (index) => {
+    if (Math.random() >= 0.5) {
+      const New = tanks.slice();
+      New.splice(index, 1);
+      alert("Kill " + tanks[index]);
+      setTanks(New);
+    } else {
+      alert("Asshole");
+    }
+  };
+  const Nie = tanks.map((item, index) => {
+    return (
+      <li
+        key={index}
+        onClick={() => {
+          Remove(index);
+        }}
+      >
+        {item}
+      </li>
+    );
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ul>{Nie}</ul>
     </div>
   );
 }
